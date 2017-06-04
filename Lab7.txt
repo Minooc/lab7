@@ -5,15 +5,15 @@ DO NOT CHANGE FORMATTING OF THIS FILE
 
 # Your Information (the person submitting this)
 #############
-# Name: Derrick Wong
-# PID: A14177250
-# Email: dcw008@ucsd.edu
+# Name: Minooc Choo
+# PID: A13411797
+# Email: michoo@ucsd.edu
 
 % Your Partner's Information (leave blank if you worked individually)
 %%%%%%%%%%%%%
-% Name:
-% PID:
-% Email:
+% Name: Derrick Wong
+% PID: A14177250
+% Email: dcw008@ucsd.edu
 
 Exercise 4: Write how you expect the maximum clock frequency, area, and throughput of the three different implementations relate to each other. Write 'C' for combinational, 'F' for folded and 'P' for pipelined and use less-than operator (<) to show the relationship. For example, you can write 'C < F < P' to indicate that a property is minimum for the combinational implementation and maximum for the pipelined implementation. Remember that your submissions are graded by a script that expects this format. If you write your answers in any other way, you will lose the points of this exercise. Write your answers one space after ":"
 
