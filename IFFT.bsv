@@ -62,8 +62,8 @@ module mkIFFTFolded(IFFT);
     // You can create additional registers or FIFOs here
     Reg#(StageIdx) counter <- mkReg(0);
     FIFOF#(DataType) f1 <- mkFIFOF;
-    FIFOF#(DataType) f2 <- mkFIFOF;
-    FIFOF#(DataType) f3 <- mkFIFOF;
+   // FIFOF#(DataType) f2 <- mkFIFOF;
+   // FIFOF#(DataType) f3 <- mkFIFOF;
 
     function DataType stage_f(StageIdx stage, DataType stage_in);
         DataType stage_temp, stage_out;
@@ -89,29 +89,33 @@ module mkIFFTFolded(IFFT);
   
     //TODO: Write the rule(s) here
     rule first (counter == 0);
-	f1.enq(stage_f(counter, inFIFO.first()));
-	inFIFO.deq();
-	counter <= counter + 1;
+	    f1.enq(stage_f(counter, inFIFO.first()));
+	    inFIFO.deq();
+	    counter <= counter + 1;
     endrule
 
     rule second (counter == 1);
-	f2.enq(stage_f(counter, f1.first()));
-	f1.deq();
-	counter <= counter + 1;
+      DataType first = f1.first(); 
+      f1.deq();
+	    f1.enq(stage_f(counter, first));
+	    // f1.deq();
+	    counter <= counter + 1;
     endrule
 
     rule third (counter == 2);
-	f3.enq(stage_f(counter, f2.first()));
-	f2.deq();
-	counter <= counter + 1;
+      DataType first = f1.first(); 
+      f1.deq();
+	    //f1.enq(stage_f(counter, first));
+	    counter <= 0;
+      outFIFO.enq(stage_f(counter, first));
     endrule
 
-    rule last (counter == 3);
+/*    rule last (counter == 3);
 	outFIFO.enq(f3.first());
 	f3.deq();
 	counter <= 0;
     endrule
-
+*/
     method Action enq(DataType in);
         inFIFO.enq(in);
     endmethod
